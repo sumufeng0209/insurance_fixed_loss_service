@@ -2,7 +2,7 @@ server:
   port: 8500
 spring:
   application:
-    name: fixed_loss-service
+    name: fixed-loss-service
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: thw
