@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="layui/layui.js" th:inline="none" charset="utf-8"></script>
+    <script src="assets/js/jquery.min.js" th:inline="none" ></script>
+
+</head>
+<body>
+<form class="layui-form" action="">
+<table class="table">
+    <caption></caption>
+    <h5 style="color: #c0a16b;">该车出现0次<a href="#" class="layui-btn">百搭按钮</a></h5>
+    <tbody>
+    <tr>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >车架号</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="vin" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >车牌号码</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="carNumber" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >发动机号</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="engineNumber" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >厂牌型号</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="brandName" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >车牌颜色</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="licensePlateColor" class="layui-input"></div>
+                </div>
+            </div>
+
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >生产厂家</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="manufacturer" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >事故地点</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="accidentLocation" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >事故责任</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="AccidentLiability" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >是否车主</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="isVehicleOwner" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >牌号种类</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="brandType" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >驾驶员</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="driver" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >驾驶证号</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="driversLicen" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >初次领证时间</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="driversLicen" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >联系方式</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="driversLicen" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="layui-row">
+                <div class="layui-col-xs6">
+                    <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >性别</div>
+                </div>
+                <div class="layui-col-xs6">
+                    <div class="grid-demo" style="float: left"><input type="text" name="driversLicen" class="layui-input"></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td  colspan="3">
+            <div class="grid-demo grid-demo-bg1" style="float: left;width: 100px;padding-top: 7px" >是否保险责任</div>
+            <div class="grid-demo" style="float: left"><input type="text" name="driversLicen" class="layui-input"></div>
+        </td>
+    </tr>
+    <tr>
+        <td  colspan="3">
+            <div class="grid-demo grid-demo-bg1" style="float: left;width: 100px;padding-top: 7px" >查勘备注</div>
+            <div class="grid-demo" style="float: left"><input type="text" name="driversLicen" class="layui-input"></div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <div style="float:right;">
+                <a href="#" class="layui-btn">上传文档</a>
+                <a href="#" class="layui-btn">现场查勘记录</a>
+                <a href="#" class="layui-btn">索赔申请书</a>
+                <a href="#" class="layui-btn">索赔须知</a>
+                <a href="#" class="layui-btn">暂缓</a>
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="layui/layui.js" th:inline="none" charset="utf-8"></script>
+    <script src="assets/js/jquery.min.js" th:inline="none" ></script>
+
+</head>
+<body>
+<form class="layui-form" action="">
+    <table class="table">
+        <tbody>
+        <tr>
+            <td colspan="3" style="background-color: #FAFAFA;height: 50px">
+                人伤勘查定损信息
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >姓名</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="name" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >性别</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left">
+                            <select name="sex" lay-verify="required">
+                                <option value="0">男</option>
+                                <option value="1">女</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >年龄</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="age" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >从事行业</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="industry" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >工作单位</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="workUnit" class="layui-input"></div>
+                    </div>
+                </div>
+
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >标准工资</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="wages" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >月收入小计</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="income" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >是否需要转院治疗</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left">
+                            <select name="ischangeHospital" lay-verify="required">
+                                <option value="0">是</option>
+                                <option value="1">否</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >护理人数</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="nursingNumber" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >护理天数</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="nursingDays" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >护理等级</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="nursingGrade" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >护理人月收入小计</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="nursesMonthlyIncome" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >护理时间</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left">
+                            <input type="text" class="layui-input" id="test1" name="startTime" >
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >至</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left">
+                            <input type="text" class="layui-input" id="test2" name="outTime" >
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >就诊医院</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="Hospital" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >入院时间</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left">
+                            <input type="text" class="layui-input" id="test3" name="timeOfAdmission" >
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >住院天数</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="hospitalizationDays" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >住院号</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="hospitalizationNumber" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >治疗天数</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left"><input type="text" name="numberOfDaysOfTreatment" class="layui-input"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >伤势程度</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left">
+                            <select name="degreeOfInjury" lay-verify="required">
+                                <option value="01">轻伤一级</option>
+                                <option value="02">轻伤二级</option>
+                                <option value="11">重伤一级</option>
+                                <option value="12">重伤二级</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >伤残等级</div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo" style="float: left">
+                            <select name="disabilityGrade" lay-verify="required">
+                                <option value="10">十级</option>
+                                <option value="9">九级</option>
+                                <option value="8">八级</option>
+                                <option value="7">七级</option>
+                                <option value="6">六级</option>
+                                <option value="5">五级</option>
+                                <option value="4">四级</option>
+                                <option value="3">三级</option>
+                                <option value="2">二级</option>
+                                <option value="1">一级</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td  colspan="3" rowspan="3">
+
+                <div class="layui-row">
+                    <div class="layui-col-md1">
+                        <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >备注</div>
+                    </div>
+                    <div class="layui-col-md11">
+                        <div class="grid-demo" style="float: left;width: 100%">
+                            <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table width="100%">
+        <tbody>
+        <tr>
+            <td colspan="6" style="background-color: #FAFAFA;height: 50px">
+                伤情类别
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="like[headInjury]" title="颅脑损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[shapeInjury]" title="样貌损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[neckInjury]" title="颈部损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[cervicalInjury]" title="颈椎损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[clavicleInjury]" title="锁骨损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[sternumInjury]" title="胸骨损失">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="like[ribInjury]" title="肋骨损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[cervicalVertebraInjury]" title="颈椎损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[spinalCordInjury]" title="脊髓损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[pelvisInjury]" title="盆骨损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[femoralHeadInjury]" title="股骨头损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[upperArmInjury]" title="上臂损伤">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="like[theLegsInjury]" title="下肢损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[fractureOfHand]" title="手部骨折">
+            </td>
+            <td>
+                <input type="checkbox" name="like[fractureOfFoot]" title="足部骨折">
+            </td>
+            <td>
+                <input type="checkbox" name="like[heartInjury]" title="心脏损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[lungInjury]" title="肺部损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[liverInjury]" title="肝脏损伤">
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="like[splenicInjury]" title="脾脏损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[pancreaticInjury]" title="胰脏损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[renalInjury]" title="肾脏损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[otherVisceralInjury]" title="其他内脏损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[softTissueInjury]" title="软组织损伤">
+            </td>
+            <td>
+                <input type="checkbox" name="like[otherInjuriesInjury]" title="其他损伤">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table width="100%">
+        <tbody>
+        <tr>
+            <td  style="background-color: #FAFAFA;height: 50px">
+                伤情描述
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea name="injuryDescription" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table width="100%">
+        <tbody>
+        <tr>
+            <td  style="background-color: #FAFAFA;height: 50px">
+                联系情况
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea name="contactInformation" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+<table width="100%">
+    <tbody>
+    <tr>
+        <td  style="background-color: #FAFAFA;height: 50px">
+            赔偿费用情况
+        </td>
+    </tr>
+    <tr>
+        <td>
+
+            <div class="layui-row">
+                <div class="layui-col-md2" style="padding-top: 10px">
+                    受害人所在车辆车牌号:
+                </div>
+                <div class="layui-col-md2">
+                    <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+                </div>
+                <div class="layui-col-md2">
+                        <button class="layui-btn" data-type="reload">搜索</button>
+                        <button class="layui-btn" data-type="getCheckLength">增加</button>
+                </div>
+                <div class="layui-col-md6">
+
+                </div>
+
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="layui-hide" id="table_user" lay-filter="user"></table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table width="100%">
+    <tr>
+        <td  style="background-color: #FAFAFA;height: 50px;">
+            定损备注
+        </td>
+    </tr>
+    <tr>
+        <td width="100%">
+            <textarea name="fixedLossRemarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </td>
+    </tr>
+</table>
+
+    <table>
+        <tr>
+            <td>
+
+                <a href="#" class="layui-btn">上传文档</a>
+                <a href="#" class="layui-btn">现场查勘记录</a>
+                <a href="#" class="layui-btn">索赔申请书</a>
+                <a href="#" class="layui-btn">索赔须知</a>
+                <a href="#" class="layui-btn">暂缓</a>
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script>
+
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+
+
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test2' //指定元素
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test3' //指定元素
+        });
+    });
+
+
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //方法级渲染
+        table.render({
+            elem: '#table_user'
+            ,url: 'humanDetails'
+            ,cols: [
+                [
+                    {checkbox: true, fixed: true}
+                    ,{field:'costName', title: '费用名称',fixed: true}
+                    ,{field:'nameOfRisk', title: '险别名称'}
+                    ,{field:'describe', title: '描述'}
+                    ,{field:'compensationFormula', title: '赔付公式'}
+                    ,{field:'amountOfLossReported', title: '报损金额'}
+                    ,{field:'excludedAmount', title: '剔除金额', sort: true}
+                    ,{field:'amountOfLossAssessed', title: '估损金额', sort: true}
+                    ,{field:'right', title: '操作', sort: true, toolbar: '#barDemo'}
+                ]
+            ]
+            ,id: 'testReload'
+            ,page: true
+            ,height: 310
+        });
+
+
+        //监听工具条
+        table.on('tool(user)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            }
+        });
+
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        key: {
+                            id: demoReload.val()
+                        }
+                    }
+                }, 'data');
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+
+
+</script>
+
+</body>
+</html>

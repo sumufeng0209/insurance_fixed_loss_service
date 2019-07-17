@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="layui/layui.js" th:inline="none" charset="utf-8"></script>
+    <script src="assets/js/jquery.min.js" th:inline="none" ></script>
+</head>
+<body>
+<form class="layui-form" action="">
+    <table>
+        <tr>
+            <td colspan="6" style="background-color: #FAFAFA;height: 50px">
+                修理厂信息
+            </td>
+        </tr>
+        <tr>
+            <td>
+                直赔/外修
+            </td>
+            <td>
+                <select name="isRepair" lay-verify="required">
+                    <option value="">直赔</option>
+                    <option value="">外修</option>
+                </select>
+            </td>
+            <td>
+                修理厂名称
+            </td>
+            <td>
+                <input type="text" name="name" class="layui-input">
+            </td>
+            <td>
+                修理厂资质
+            </td>
+            <td>
+                <select name="Qualifications" lay-verify="required">
+                    <option value="">一类</option>
+                    <option value="">二类</option>
+                    <option value="">三类</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>修理厂电话</td>
+            <input type="text" name="Telephone" class="layui-input">
+            <td>修理厂传真</td>
+            <td><input type="text" name="Fax" class="layui-input"></td>
+            <td>修理厂联系人</td>
+            <td><input type="text" name="name" class="layui-input"></td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                修理厂地址<input type="text" name="name" class="layui-input">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                更换项目
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <table class="layui-hide" id="test"></table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+            </td>
+        </tr>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+</form>
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+
+
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url:'sues'
+            ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                ,groups: 1 //只显示 1 个连续页码
+                ,first: false //不显示首页
+                ,last: false //不显示尾页
+            }
+            ,cols: [
+                [
+                    {field:'username',  title: '项目名称'}
+                    ,{field:'sex',  title: '险别名称', sort: true}
+                    ,{field:'city',  title: '定损人工费'}
+                    ,{field:'sign', title: '定损材料费'}
+                    ,{field:'experience', title: '配件编号', sort: true}
+                    ,{field:'score',title: '备件来源', sort: true}
+                    ,{field:'classify',  title: '数量'}
+                    ,{field:'wealth',  title: '本地价格', sort: true}
+                ]
+            ]
+
+        });
+    });
+
+
+
+</script>
+</body>
+</html>

@@ -19,3 +19,6 @@ eureka:
       default-Zone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true
+mybatis:
+  mapper-locations: mappers/*Mapper.xml
+  type-aliases-package: java.util

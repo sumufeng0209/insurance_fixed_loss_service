@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="layui/layui.js" th:inline="none" charset="utf-8"></script>
+    <script src="assets/js/jquery.min.js" th:inline="none" ></script>
+</head>
+<body>
+<form class="layui-form" action="">
+    <table width="100%">
+        <tr>
+            <td colspan="6" style="background-color: #FAFAFA;height: 50px">
+                盗抢车辆信息
+            </td>
+        </tr>
+        <tr>
+            <td>车牌号码</td>
+            <td><input type="text" name="carNumber"class="layui-input"></td>
+            <td>发动机号</td>
+            <td><input type="text" name="engineNumber"class="layui-input"></td>
+            <td>车架号</td>
+            <td><input type="text" name="vin"class="layui-input"></td>
+        </tr>
+        <tr>
+            <td>车牌颜色</td>
+            <td><input type="text" name="carColor"class="layui-input"></td>
+            <td>发动品牌</td>
+            <td><input type="text" name="engineBrand"class="layui-input"></td>
+            <td>车型</td>
+            <td><input type="text" name="vehicleType"class="layui-input"></td>
+        </tr>
+        <tr>
+            <td>新车购置价</td>
+            <td><input type="text" name="Purchase price"class="layui-input"></td>
+            <td>已行驶公里数</td>
+            <td><input type="text" name="kilometre"class="layui-input"></td>
+            <td>实际使用年龄</td>
+            <td><input type="text" name="carAge"class="layui-input"></td>
+        </tr>
+        <tr>
+            <td>
+                备注
+            </td>
+            <td colspan="5">
+                <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td >
+                定损备注
+            </td>
+            <td colspan="5">
+                <textarea name="fixedLossRemarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <div style="float:right;">
+                    <a href="#" class="layui-btn">上传文档</a>
+                    <a href="#" class="layui-btn">现场查勘记录</a>
+                    <a href="#" class="layui-btn">索赔申请书</a>
+                    <a href="#" class="layui-btn">索赔须知</a>
+                    <a href="#" class="layui-btn">暂缓</a>
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

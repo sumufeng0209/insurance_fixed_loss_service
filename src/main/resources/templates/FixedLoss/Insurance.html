@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="layui/layui.js" th:inline="none" charset="utf-8"></script>
+    <script src="assets/js/jquery.min.js" th:inline="none" ></script>
+
+</head>
+<body>
+<div class="layui-row">
+    <div class="layui-col-md3">
+        &nbsp;
+    </div>
+
+    <div class="layui-col-md6">
+        <div class="demoTable" >
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div style="width: 100px;display: inline-block">
+                    赔案编号：
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="layui-col-md6">
+                    <div style="width: 100px;display: inline-block">
+                    调度编号：
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" name="id" id="demoReload1" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div style="width: 100px;display: inline-block">
+                    被保险人：
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" name="id" id="demoReload2" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div style="width: 100px;display: inline-block">
+                    车牌号：
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" name="id" id="car_Number" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div style="width: 100px;display: inline-block">
+                        调度开始时间：
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" name="id" id="statTime" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div style="width: 100px;display: inline-block">
+                    调度结束时间：
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" name="id" id="endTime" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <button class="layui-btn" data-type="reload" style="float: right">搜索</button>
+        </div>
+    </div>
+
+    <div class="layui-col-md3">
+        &nbsp;
+    </div>
+</div>
+
+
+<table class="layui-hide" id="LAY_table_user" lay-filter="test"></table>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+</script>
+
+
+
+<script th:inline="none">
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#endTime' //指定元素
+        });
+        laydate.render({
+            elem: '#statTime' //指定元素
+        });
+    });
+
+
+
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //方法级渲染
+        table.render({
+            elem: '#LAY_table_user'
+            ,url: 'findAll'
+            ,cols: [[
+                {checkbox: true, fixed: true}
+                ,{field:'compensate_case_id', title: '赔案编号', sort: true, fixed: true}
+                ,{field:'schedule_id', title: '调度编号'}
+                ,{field:'insured_truename', title: '被保险人', sort: true}
+                ,{field:'car_number', title: '车牌号'}
+                ,{field:'type', title: '任务类型'}
+                ,{field:'choice',title:'操作', toolbar: '#barDemo'}
+            ]]
+            ,id: 'testReload'
+            ,page: true
+            ,height: 310
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+                var demoReload2 = $('#demoReload2');
+
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        compensate_case_id: demoReload.val()
+                        ,ss:demoReload2.val()
+                    }
+                }, 'data');
+            }
+        };
+
+
+        table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            if(layEvent === 'detail'){ //查看
+                //do somehing
+                layer.open({
+                    type: 2,
+                    content: 'car',
+                    area: ['800px', '600px'],
+                    title: ['查勘信息']
+                });
+
+            }
+        });
+
+
+
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+</body>
+</html>
