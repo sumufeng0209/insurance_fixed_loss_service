@@ -7,5 +7,26 @@
         SELECT * FROM vehicle_damage
 
     </select>
-    
+
+
+    <select id="scheduleFindBy" parameterType="map" resultType="map">
+
+        SELECT* FROM schedule
+        <where>
+            <if test="#{schedule_id!=null and schedule_id!=''}">
+                schedule_id=#{schedule}
+            </if>
+
+            <if test="#{compensate_case_id!=null and compensate_case_id!=''}">
+                compensate_case_id=#{compensate_case_id}
+            </if>
+
+            <if test="#{compensate_case_id!=null and compensate_case_id!=''}">
+                compensate_case_id=#{compensate_case_id}
+            </if>
+        </where>
+
+    </select>
+
+
 </mapper>

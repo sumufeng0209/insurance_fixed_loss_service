@@ -8,5 +8,5 @@ import java.util.Map;
 @Mapper
 public interface FixedLossMapper {
 
-    public List<Map> findBy(Map m);
+    public List<Map> scheduleFindBy(Map m);
 }

@@ -1,11 +1,17 @@
 package org.java.web;
 
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.TaskService;
 import org.java.service.FixedLossService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +22,14 @@ public class FixedLossController {
     @Autowired
     private FixedLossService productService;
 
+    @Autowired(required = false)
+    private ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+
+
+    @RequestMapping("index")
+    public String index(){
+        return "index";
+    }
 
 
 
@@ -25,7 +39,11 @@ public class FixedLossController {
      */
     @RequestMapping("/findAll")
     @ResponseBody
-    public Map getList(){
+    public Map getList(@RequestParam Map m){
+
+        System.out.println(m);
+
+
 
         Map map=new HashMap();
         map.put("code",0);
@@ -104,6 +122,42 @@ public class FixedLossController {
     public String sue(){
         return "FixedLoss/sue";
     }
+
+
+    /**
+     * 物损查勘定损页面
+     * @return
+     */
+    @RequestMapping("MaterialDamage")
+    public String MaterialDamage(){
+        return "FixedLoss/MaterialDamage";
+    }
+
+
+    @RequestMapping("md")
+    @ResponseBody
+    public Map md(){
+        Map map=new HashMap();
+        map.put("code",0);
+        map.put("count",1000);
+        map.put("msg","");
+        map.put("data",productService.md());
+
+        return map;
+    }
+
+
+    /**
+     * 流程提交
+     */
+    public void completeTask(){
+        TaskService service=engine.getTaskService();
+        String taskId="";
+        service.complete(taskId);
+    }
+
+
+
 
 
 }

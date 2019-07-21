@@ -131,7 +131,11 @@
         var $ = layui.$, active = {
             reload: function(){
                 var demoReload = $('#demoReload');
+                var demoReload1 = $('#demoReload1');
                 var demoReload2 = $('#demoReload2');
+                var demoReload3 = $('#car_Number');
+                var demoReload4 = $('#statTime');
+                var demoReload5 = $('#endTime');
 
                 //执行重载
                 table.reload('testReload', {
@@ -140,7 +144,11 @@
                     }
                     ,where: {
                         compensate_case_id: demoReload.val()
-                        ,ss:demoReload2.val()
+                        ,schedule_id:demoReload1.val()
+                        ,insured_truename:demoReload2.val()
+                        ,car_number:demoReload3.val()
+                        ,start_time:demoReload4.val()
+                        ,stop_time:demoReload5.val()
                     }
                 }, 'data');
             }
