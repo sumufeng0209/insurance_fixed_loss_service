@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.java.dao.HumanInjuryDamageMapper">
+    <select id="findByProcessInstanceId" resultType="map">
+        SELECT * FROM human_injury_damage hid,`schedule` s,compensate_case cc,report_a_case rac
+            WHERE hid.schedule_id = s.schedule_id
+            AND cc.compensate_case_id = s.compensate_case_id
+            AND cc.compensate_case_id = rac.compensate_case_id
+            AND hid.instance_id = #{processInstanceId}
+    </select>
+</mapper>

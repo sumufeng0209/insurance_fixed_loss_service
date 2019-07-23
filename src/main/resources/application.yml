@@ -13,6 +13,13 @@ spring:
       min-idle: 20
       max-idle: 100
       max-active: 300
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+    encoding: UTF-8
+  activiti:
+    database-schema: update
+    check-process-definitions: false
 eureka:
   client:
     service-url:
@@ -20,5 +27,5 @@ eureka:
   instance:
     prefer-ip-address: true
 mybatis:
-  mapper-locations: mappers/*Mapper.xml
+  mapper-locations: Mapper/*Mapper.xml
   type-aliases-package: java.util
