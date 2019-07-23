@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.java.dao.VehicleDamageVerifyMapper">
     <update id="audit" parameterType="map">
-        update human_injury_damage_verify set is_adopt = #{is_adopt} where verify_id = #{verify_id}
+        update vehicle_damage_verify set is_adopt = #{is_adopt} where verify_id = #{verify_id}
     </update>
+    <insert id="audit" parameterType="map">
+        insert into vehicle_damage_verify values
+        (
+            uuid(),#{rescue_price},#{verify_loss_discount},
+            #{is_adopt},#{verify_comment},#{verify_material_fee},
+            #{verify_labor_costs},#{verify_manager_fee},#{verify_residual_value},
+            #{verify_sum_price},#{vehilce_damage_id},#{emp_id},
+            now(),#{instance_id}
+        )
+    </insert>
 </mapper>

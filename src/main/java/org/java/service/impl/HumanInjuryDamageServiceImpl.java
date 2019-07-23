@@ -16,4 +16,9 @@ public class HumanInjuryDamageServiceImpl implements HumanInjuryDamageService {
     public Map<String, Object> findByProcessInstanceId(String processInstanceId) {
         return humanInjuryDamageMapper.findByProcessInstanceId(processInstanceId);
     }
+
+    @Override
+    public Map<String, Object> findById(String human_injury_damage_id) {
+        return humanInjuryDamageMapper.findById(human_injury_damage_id);
+    }
 }

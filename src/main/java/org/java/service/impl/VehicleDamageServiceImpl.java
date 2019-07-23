@@ -13,4 +13,9 @@ public class VehicleDamageServiceImpl implements VehicleDamageService {
     public Map<String, Object> findByProcessInstanceId(String processInstanceId) {
         return vehicleDamageService.findByProcessInstanceId(processInstanceId);
     }
+
+    @Override
+    public Map<String, Object> findById(String vehilce_damage_id) {
+        return vehicleDamageService.findById(vehilce_damage_id);
+    }
 }

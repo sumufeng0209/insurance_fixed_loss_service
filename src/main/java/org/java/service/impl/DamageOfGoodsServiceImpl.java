@@ -17,4 +17,9 @@ public class DamageOfGoodsServiceImpl implements DamageOfGoodsService {
     public Map<String, Object> findByProcessInstanceId(String processInstanceId) {
         return damageOfGoodsMapper.findByProcessInstanceId(processInstanceId);
     }
+
+    @Override
+    public Map<String, Object> findById(String damage_of_goods_id) {
+        return damageOfGoodsMapper.findById(damage_of_goods_id);
+    }
 }

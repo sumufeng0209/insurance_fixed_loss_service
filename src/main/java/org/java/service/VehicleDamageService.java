@@ -4,5 +4,6 @@ import java.util.Map;
 
 public interface VehicleDamageService {
 
-    Map<String,Object> findByProcessInstanceId(String vehilce_damage_id);
+    Map<String,Object> findByProcessInstanceId(String processInstanceId);
+    Map<String,Object> findById(String vehilce_damage_id);
 }

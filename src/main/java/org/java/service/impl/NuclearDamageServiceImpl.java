@@ -84,6 +84,7 @@ public class NuclearDamageServiceImpl implements NuclearDamageService {
                     continue;
                 }
             }
+            map.put("instance_id",task.getProcessInstanceId());
             map.put("taskId",task.getId());//任务id
             map.put("taskName",task.getName());//任务名称
             map.put("createtime",task.getCreateTime());//任务的开始时间

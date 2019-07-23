@@ -14,4 +14,9 @@ public class RobberyDamageServiceImpl implements RobberyDamageService {
     public Map<String, Object> findByProcessInstanceId(String processInstanceId) {
         return robberyDamageMapper.findByProcessInstanceId(processInstanceId);
     }
+
+    @Override
+    public Map<String, Object> findById(String robbery_damage_id) {
+        return robberyDamageMapper.findById(robbery_damage_id);
+    }
 }

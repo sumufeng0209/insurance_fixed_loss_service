@@ -14,6 +14,18 @@ import java.util.Map;
 public class NuclearDamageController {
     @Autowired
     private NuclearDamageService nuclearDamageService;
+    @Autowired
+    private DamageOfGoodsService damageOfGoodsService;
+    @Autowired
+    private HumanInjuryDamageService humanInjuryDamageService;
+    @Autowired
+    private RobberyDamageService robberyDamageService;
+    @Autowired
+    private VehicleDamageService vehicleDamageService;
+    @Autowired
+    private ReplaceProjectService replaceProjectService;
+    @Autowired
+    private RepairProjectService repairProjectService;
 
     @RequestMapping("loadPage")
     private String loadPage(){
@@ -31,5 +43,41 @@ public class NuclearDamageController {
     private Map<String,Object> audit(@RequestParam Map<String,Object> map){
         nuclearDamageService.audit(map);
         return null;
+    }
+
+    @RequestMapping("showCheLiang")
+    @ResponseBody
+    private Map<String,Object> showCheLiang(String vehilce_damage_id){
+        return vehicleDamageService.findById(vehilce_damage_id);
+    }
+
+    @RequestMapping("showRenShang")
+    @ResponseBody
+    private Map<String,Object> showRenShang(String human_injury_damage_id){
+        return humanInjuryDamageService.findById(human_injury_damage_id);
+    }
+
+    @RequestMapping("showDaoQiang")
+    @ResponseBody
+    private Map<String,Object> showDaoQiang(String robbery_damage_id){
+        return robberyDamageService.findById(robbery_damage_id);
+    }
+
+    @RequestMapping("showWuSun")
+    @ResponseBody
+    private Map<String,Object> showWuSun(String damage_of_goods_id){
+        return damageOfGoodsService.findById(damage_of_goods_id);
+    }
+
+    @RequestMapping("showRepairProject")
+    @ResponseBody
+    private Map<String,Object> showRepairProject(String vehilce_damage_id){
+        return repairProjectService.findByVehilceDamageId(vehilce_damage_id);
+    }
+
+    @RequestMapping("showRepairProject")
+    @ResponseBody
+    private Map<String,Object> showReplaceProject(String vehilce_damage_id){
+        return replaceProjectService.findByVehilceDamageId(vehilce_damage_id);
     }
 }
