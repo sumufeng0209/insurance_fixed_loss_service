@@ -10,4 +10,5 @@ import java.util.Map;
 @Component
 public interface HumanInjuryDamageMapper {
     Map<String,Object> findByProcessInstanceId(@Param("processInstanceId") String processInstanceId);
+    Map<String,Object> findById(@Param("human_injury_damage_id") String human_injury_damage_id);
 }

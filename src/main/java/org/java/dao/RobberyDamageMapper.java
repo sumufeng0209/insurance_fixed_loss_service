@@ -11,4 +11,6 @@ import java.util.Map;
 public interface RobberyDamageMapper {
 
     Map<String,Object> findByProcessInstanceId(@Param("processInstanceId") String processInstanceId);
+
+    Map<String,Object> findById(@Param("robbery_damage_id") String robbery_damage_id);
 }

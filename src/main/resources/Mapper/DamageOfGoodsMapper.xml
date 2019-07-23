@@ -8,7 +8,11 @@
         AND cc.compensate_case_id = rac.compensate_case_id
         AND dog.instance_id = #{processInstanceId}
     </select>
-    <update id="update" parameterType="map">
-        update damage_of_goods set
-    </update>
+    <select id="findById" resultType="map">
+        SELECT * FROM damage_of_goods dog,`schedule` s,compensate_case cc,report_a_case rac
+        WHERE dog.schedule_id = s.schedule_id
+        AND cc.compensate_case_id = s.compensate_case_id
+        AND cc.compensate_case_id = rac.compensate_case_id
+        AND dog.damage_of_goods_id = #{damage_of_goods_id}
+    </select>
 </mapper>

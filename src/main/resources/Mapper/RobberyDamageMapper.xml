@@ -8,4 +8,11 @@
             AND cc.compensate_case_id = rac.compensate_case_id
             AND rd.instance_id = #{processInstanceId}
     </select>
+    <select id="findById" resultType="map">
+        SELECT * FROM robbery_damage rd,`schedule` s,compensate_case cc,report_a_case rac
+            WHERE rd.schedule_id = s.schedule_id
+            AND cc.compensate_case_id = s.compensate_case_id
+            AND cc.compensate_case_id = rac.compensate_case_id
+            AND rd.robbery_damage_id = #{robbery_damage_id}
+    </select>
 </mapper>
