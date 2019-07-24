@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <script th:src="@{'/js/jquery.js'}"></script>
-    <link th:href="@{'/bootstrap/bootstrap.min.css'}" rel="stylesheet" type="text/css">
-    <script th:src="@{'/bootstrap/bootstrap.min.js'}"></script>
-    <link th:href="@{'/layui/css/layui.css'}" rel="stylesheet" type="text/css">
-    <script th:src="@{'/layui/layui.js'}"></script>
-    <link th:href="@{'/css/waitingDamage.css'}" rel="stylesheet" type="text/css">
+    <script src="js/jquery.js"></script>
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <link href="layui/css/layui.css" rel="stylesheet" type="text/css">
+    <script src="layui/layui.js"></script>
+    <link href="css/waitingDamage.css" rel="stylesheet" type="text/css">
     <script type="text/html" id="edit1">
         <div>
             <button type="button" class="btn btn-default">核损1</button>
@@ -44,7 +44,7 @@
 <div>
     <button type="button" id="carLossBtn" class="btn btn-default" >核损</button>
 </div>
-<table class="layui-table" id="showData" lay-filter="documentsTable">
+<table class="layui-table" id="showData" lay-filter="showData1">
 
 </table>
 <div class="modal fade" id="carLossModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -514,6 +514,23 @@
         form.render();
         table = layui.table;
         showData();
+        table.on('row(showData1)', function(obj){
+            var data = obj.data;
+            if (data.taskName === "车辆定损") {
+                $('#robberyModal').modal();
+                $.ajax({
+                    url:"http://localhost:9000/gateway/fixed-loss/showCheLiang",
+                    data:{"vehilce_damage_id":vehilce_damage_id},
+                    dataType:"json",
+                    success:function(data){
+                        alert(data);
+                    }
+                });
+            }
+
+            //标注选中样式
+            obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+        });
 
     });
     //渲染表格,显示数据
@@ -527,6 +544,7 @@
                 ,{field:'schedule_id',title: '调度编号',align : 'center'}
                 ,{field:'insured_truename',title: '被保险人',align : 'center'}
                 ,{field:'car_number',title: '车牌号',align : 'center'}
+                ,{field:'taskName',title: '任务类型',align : 'center'}
                 ,{fixed: 'right', title:'操作',align : 'center', toolbar: '#edit1'}
             ]
             ]
@@ -581,14 +599,11 @@
             ]
             ,page: true
         });
-        table.on('row(showData)', function(obj){
-            var data = obj.data;
-        });
     }
     $(function(){
-        $("#carLossBtn").click(function(){
-            $('#robberyModal').modal();
-        });
+        $("#carLossBtn").click(function () {
+            $('#robberyModal').modal("show");
+        })
         $("#projectLabel").click(function(){
             if(state === 0){
                 $("#projectLabel").text("修理项目");
@@ -611,5 +626,8 @@
         var sumPrice = verify_material_fee + verify_labor_costs + verify_manager_fee + verify_residual_value;
         $("#verify_sum_price").val(sumPrice);
     }
+    $(function () {
+
+    });
 </script>
 </html>
