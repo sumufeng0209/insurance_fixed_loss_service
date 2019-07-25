@@ -17,7 +17,7 @@
 </head>
 <body>
 <form class="bs-example bs-example-form" role="form">
-    <div class="form-group" style="margin: 20px 420px;">
+    <div class="form-group" style="margin: 20px 280px;">
         <div class="input-group">
             <span class="input-group-addon">赔案编号:</span>
             <input type="text" class="form-control" name="compensate_case_id">
@@ -27,7 +27,7 @@
             <input type="text" class="form-control" name="insured_truename">
         </div>
     </div>
-    <div style="float: right;margin: -108px 420px;" class="form-group">
+    <div style="float: right;margin: -108px 280px;" class="form-group">
         <div class="input-group">
             <span class="input-group-addon">调度编号:</span>
             <input type="text" class="form-control" name="schedule_id">
@@ -42,7 +42,7 @@
     </div>
 </form>
 <div>
-    <button type="button" id="carLossBtn" class="btn btn-default" >核损</button>
+    <button type="button" id="heSunBtn" class="btn btn-default" >核损</button>
 </div>
 <table class="layui-table" id="showData" lay-filter="showData1">
 
@@ -55,11 +55,13 @@
                 <h4 class="modal-title" id="myModalLabel">详细信息</h4>
             </div>
             <div class="modal-body">
+                <form action="cheSunAudit">
+                <input type="hidden" name="taskId" id="cheSunTaskId">
                 <label>车辆信息</label>
                 <div style="padding: 10px;background: #DFEEFF;" class="form-inline">
                     <div class="input-group">
                         <span style="width: 120px;" class="input-group-addon">车牌号码:</span>
-                        <input type="text" disabled class="form-control" name="car_number">
+                        <input type="text" disabled class="form-control" name="car_number" id="carLoss_car_number">
                     </div>
                     <div class="input-group">
                         <span style="width: 120px;" class="input-group-addon">车牌颜色:</span>
@@ -121,7 +123,7 @@
                 <div style="padding: 10px;background: #DFEEFF;" class="form-inline">
                     <div class="input-group">
                         <span style="width: 120px;" class="input-group-addon">定损施救费用:</span>
-                        <input type="text" disabled class="form-control" name="fee_rescue_price" id="fee_rescue_price">
+                        <input type="text" disabled class="form-control" name="rescue_price" id="rescue_price">
                     </div>
                     <div class="input-group">
                         <span style="width: 120px;" class="input-group-addon">定损折扣残值:</span>
@@ -193,10 +195,10 @@
                         <input type="text" disabled class="form-control" value="0" name="verify_sum_price" id="verify_sum_price">
                     </div>
                 </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-                <button type="button" id="upDocument" class="btn btn-primary">上传文档</button>
                 <button type="button" id="submit" class="btn btn-primary">提交</button>
             </div>
         </div><!-- /.modal-content -->
@@ -434,7 +436,9 @@
                 <h4 class="modal-title" id="robberyLabel">盗抢核损</h4>
             </div>
             <div class="modal-body">
+                <form id="daoQaingForm" action="daoQaingAudit">
                 <label>盗抢车辆信息</label>
+                    <input type="hidden" name="taskId" id="daoQaingTaskId">
                 <div style="padding: 10px;background: #DFEEFF;" class="form-inline">
                     <div class="input-group">
                         <span style="width: 120px;" class="input-group-addon">车牌号码:</span>
@@ -492,13 +496,13 @@
                     </div>
                     <div class="input-group">
                         <span style="width: 120px;" class="input-group-addon">核损备注:</span>
-                        <textarea disabled cols="120" rows="4" id="robbery_verify_comment" name="robbery_verify_comment" class="form-control"></textarea>
+                        <textarea cols="120" rows="4" id="robbery_verify_comment" name="robbery_verify_comment" class="form-control"></textarea>
                     </div>
                 </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-                <button type="button" id="robbery_upDocument" class="btn btn-primary">上传文档</button>
                 <button type="button" id="robbery_submit" class="btn btn-primary">提交</button>
             </div>
         </div><!-- /.modal-content -->
@@ -517,13 +521,54 @@
         table.on('row(showData1)', function(obj){
             var data = obj.data;
             if (data.taskName === "车辆定损") {
-                $('#robberyModal').modal();
+                $('#carLossModal').modal();
                 $.ajax({
                     url:"http://localhost:9000/gateway/fixed-loss/showCheLiang",
-                    data:{"vehilce_damage_id":vehilce_damage_id},
+                    data:{"vehilce_damage_id":data.vehilce_damage_id},
                     dataType:"json",
                     success:function(data){
-                        alert(data);
+                        $("#carLoss_car_number").val(data.car_number);
+                        $("#car_number_color").val(data.car_number_color);
+                        $("#manufacturer").val(data.manufacturer);
+                        $("#car_vin").val(data.car_vin);
+                        $("#car_engine_number").val(data.car_engine_number);
+
+                        $("#rest_type").val(data.rest_type);
+                        $("#repair_depot_name").val(data.repair_depot_name);
+                        $("#repair_depot_level").val(data.repair_depot_level);
+                        $("#repair_depot_phone").val(data.repair_depot_phone);
+                        $("#repair_depot_fax").val(data.repair_depot_fax);
+
+                        $("#repair_depot_linkman").val(data.repair_depot_linkman);
+                        $("#repair_depot_address").val(data.repair_depot_address);
+                        $("#rescue_price").val(data.rescue_price);
+
+                        $("#fixed_loss_discount").val(data.fixed_loss_discount);
+                        $("#opinion_manager_fee").val(data.opinion_manager_fee);
+                        $("#fixed_loss_method").val(data.fixed_loss_method);
+                        $("#fixed_loss_comment").val(data.fixed_loss_comment);
+
+                    }
+                });
+            }else if (data.taskName === "盗抢定损") {
+                $('#robberyModal').modal();
+                $.ajax({
+                    url:"http://localhost:9000/gateway/fixed-loss/showDaoQiang",
+                    data:{"robbery_damage_id":data.robbery_damage_id},
+                    dataType:"json",
+                    success:function(data){
+                        $("#robbery_car_number").val(data.car_number);
+                        $("#robbery_car_engine_number").val(data.car_engine_number);
+                        $("#robbery_car_vin").val(data.car_vin);
+                        $("#license_plate_color").val(data.license_plate_color);
+                        $("#car_brand").val(data.car_brand);
+
+                        $("#car_type").val(data.car_type);
+                        $("#pay_price").val(data.pay_price);
+                        $("#driving_kilometre").val(data.driving_kilometre);
+                        $("#service_life").val(data.service_life);
+                        $("#robbery_fixed_loss_comment").val(data.fixed_loss_comment);
+
                     }
                 });
             }
@@ -601,9 +646,9 @@
         });
     }
     $(function(){
-        $("#carLossBtn").click(function () {
+        $("#heSunBtn").click(function () {
             $('#robberyModal').modal("show");
-        })
+        });
         $("#projectLabel").click(function(){
             if(state === 0){
                 $("#projectLabel").text("修理项目");
@@ -616,6 +661,9 @@
         $(".price").keyup(function(){
             total();
         });
+        $("#robbery_submit").click(function () {
+            $("#daoQaingForm").submit();
+        });
     });
 
     function total(){
@@ -626,8 +674,5 @@
         var sumPrice = verify_material_fee + verify_labor_costs + verify_manager_fee + verify_residual_value;
         $("#verify_sum_price").val(sumPrice);
     }
-    $(function () {
-
-    });
 </script>
 </html>
