@@ -27,21 +27,28 @@ public class NuclearDamageController {
     @Autowired
     private RepairProjectService repairProjectService;
 
-    @RequestMapping("loadPage")
+    @RequestMapping("/loadPage")
     private String loadPage(){
-        return "nuclearDamage/waitingDamage";
+        System.out.println("123");
+        return "/nuclearDamage/waitingDamage";
     }
 
     @RequestMapping("showAll")
     @ResponseBody
     private Map<String,Object> showAll(@RequestParam Map<String,Object> map,HttpSession session){
-        map.put("userName",session.getAttribute("userName"));
+        map.put("userName",session.getAttribute("emp"));
         return nuclearDamageService.showAll(map);
     }
 
-    @RequestMapping("audit")
-    private Map<String,Object> audit(@RequestParam Map<String,Object> map){
-        nuclearDamageService.audit(map);
+    @RequestMapping("cheSunAudit")
+    private Map<String,Object> cheSunAudit(@RequestParam Map<String,Object> map){
+        nuclearDamageService.cheSunAudit(map);
+        return null;
+    }
+    @RequestMapping("daoQaingAudit")
+    private Map<String,Object> daoQaingAudit(@RequestParam Map<String,Object> map){
+        System.out.println("进入盗抢审核");
+        nuclearDamageService.daoQaingAudit(map);
         return null;
     }
 
@@ -75,7 +82,7 @@ public class NuclearDamageController {
         return repairProjectService.findByVehilceDamageId(vehilce_damage_id);
     }
 
-    @RequestMapping("showRepairProject")
+    @RequestMapping("showReplaceProject")
     @ResponseBody
     private Map<String,Object> showReplaceProject(String vehilce_damage_id){
         return replaceProjectService.findByVehilceDamageId(vehilce_damage_id);
