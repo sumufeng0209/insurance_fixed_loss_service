@@ -49,41 +49,16 @@ public class NuclearDamageServiceImpl implements NuclearDamageService {
         query.taskAssignee(paramMap.get("userName").toString());
         List<Task> tasks = query.list();
 
-        List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         for (Task task : tasks) {
             String processInstanceId = task.getProcessInstanceId();
-            String taskName = task.getName();
-            Map map = null;
-            if (taskName.equals("车辆定损核损")){
+            Map<String,Object> map = null;
+            if (task.getName().equals("车辆定损")){
                 map = vehicleDamageMapper.findByProcessInstanceId(processInstanceId);
-            }else if (taskName.equals("人伤定损核损")){
-                map = humanInjuryDamageMapper.findByProcessInstanceId(processInstanceId);
-            }else if (taskName.equals("物损定损核损")){
-                map = damageOfGoodsMapper.findByProcessInstanceId(processInstanceId);
-            }else if (taskName.equals("盗抢定损核损")){
+            }else if (task.getName().equals("盗抢定损")){
                 map = robberyDamageMapper.findByProcessInstanceId(processInstanceId);
             }
-            String compensate_case_id = map.get("compensate_case_id").toString();
-            String schedule_id = map.get("schedule_id").toString();
-            String insured_truename = map.get("insured_truename").toString();
-            String car_number = map.get("car_number").toString();
-            if (StringUtils.isNotBlank(paramMap.get("compensate_case_id").toString())){
-                if (!compensate_case_id.equals(paramMap.get("compensate_case_id").toString())){
-                    continue;
-                }
-            }else if (StringUtils.isNotBlank(paramMap.get("schedule_id").toString())){
-                if (!schedule_id.equals(paramMap.get("schedule_id").toString())){
-                    continue;
-                }
-            }else if (StringUtils.isNotBlank(paramMap.get("insured_truename").toString())){
-                if (!insured_truename.equals(paramMap.get("insured_truename").toString())){
-                    continue;
-                }
-            }else if (StringUtils.isNotBlank(paramMap.get("car_number").toString())){
-                if (!car_number.equals(paramMap.get("car_number").toString())){
-                    continue;
-                }
-            }
+
             map.put("instance_id",task.getProcessInstanceId());
             map.put("taskId",task.getId());//任务id
             map.put("taskName",task.getName());//任务名称
@@ -99,18 +74,18 @@ public class NuclearDamageServiceImpl implements NuclearDamageService {
     }
 
     @Override
-    public void audit(Map<String,Object> map) {
+    public void cheSunAudit(Map<String, Object> map) {
         String taskId = map.get("taskId").toString();
-        String taskName = map.get("taskName").toString();
-        if (taskName.equals("车辆定损核损")){
-            vehicleDamageVerifyMapper.audit(map);
-        }else if (taskName.equals("人伤定损核损")){
-            humanInjuryDamageVerifyMapper.audit(map);
-        }else if (taskName.equals("物损定损核损")){
-            damageOfGoodsVerifyMapper.audit(map);
-        }else if (taskName.equals("盗抢定损核损")){
-            robberyDamageVerifyMapper.audit(map);
-        }
+        vehicleDamageVerifyMapper.audit(map);
+        Map<String,Object> variables = new HashMap<>();
+        variables.put("carAdopt",map.get("is_adopt")); //设置流程变量
+        taskService.complete(taskId,variables);
+    }
+
+    @Override
+    public void daoQaingAudit(Map<String, Object> map) {
+        String taskId = map.get("taskId").toString();
+        robberyDamageVerifyMapper.audit(map);
         Map<String,Object> variables = new HashMap<>();
         variables.put("carAdopt",map.get("is_adopt")); //设置流程变量
         taskService.complete(taskId,variables);
