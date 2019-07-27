@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <script src="assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
     <script src="layui/layui.js" th:inline="none" charset="utf-8"></script>
     <script src="assets/js/jquery.min.js" th:inline="none" ></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/bootstrap.min.js"></script>
 </head>
 <body>
 <form class="layui-form" action="">
-    <table width="100%">
+    <table width="100%" class="table">
+        <tbody>
         <tr>
             <td colspan="6" style="background-color: #FAFAFA;height: 50px">
                 盗抢车辆信息
@@ -20,34 +21,34 @@
         </tr>
         <tr>
             <td>车牌号码</td>
-            <td><input type="text" name="carNumber"class="layui-input"></td>
+            <td><input type="text" name="car_number"class="layui-input" th:value="${car_number}"></td>
             <td>发动机号</td>
-            <td><input type="text" name="engineNumber"class="layui-input"></td>
+            <td><input type="text" name="car_engine_number"class="layui-input" th:value="${car_engine_number}"></td>
             <td>车架号</td>
-            <td><input type="text" name="vin"class="layui-input"></td>
+            <td><input type="text" name="car_vin"class="layui-input" th:value="${car_vin}"></td>
         </tr>
         <tr>
             <td>车牌颜色</td>
-            <td><input type="text" name="carColor"class="layui-input"></td>
+            <td><input type="text" name="license_plate_color"class="layui-input" th:value="${license_plate_color}"></td>
             <td>发动品牌</td>
-            <td><input type="text" name="engineBrand"class="layui-input"></td>
+            <td><input type="text" name="car_brand"class="layui-input" th:value="${car_brand}"></td>
             <td>车型</td>
-            <td><input type="text" name="vehicleType"class="layui-input"></td>
+            <td><input type="text" name="car_type"class="layui-input" th:value="${car_type}"></td>
         </tr>
         <tr>
             <td>新车购置价</td>
-            <td><input type="text" name="Purchase price"class="layui-input"></td>
+            <td><input type="text" name="pay_price"class="layui-input" th:value="${pay_price}"></td>
             <td>已行驶公里数</td>
-            <td><input type="text" name="kilometre"class="layui-input"></td>
+            <td><input type="text" name="driving_kilometre"class="layui-input" th:value="${driving_kilometre}"></td>
             <td>实际使用年龄</td>
-            <td><input type="text" name="carAge"class="layui-input"></td>
+            <td><input type="text" name="service_life"class="layui-input" th:value="${service_life}"></td>
         </tr>
         <tr>
             <td>
                 备注
             </td>
             <td colspan="5">
-                <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+                <textarea name="comment" placeholder="请输入内容" class="layui-textarea" th:text="${fixed_loss_comment}"></textarea>
             </td>
         </tr>
         <tr>
@@ -55,7 +56,7 @@
                 定损备注
             </td>
             <td colspan="5">
-                <textarea name="fixedLossRemarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+                <textarea name="fixed_loss_comment" placeholder="请输入内容" class="layui-textarea" th:text="${fixed_loss_comment}"></textarea>
             </td>
         </tr>
         <tr>
@@ -70,6 +71,7 @@
                 </div>
             </td>
         </tr>
+        </tbody>
     </table>
 </form>
 <script>
@@ -78,7 +80,16 @@
 
         //监听提交
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
+
+            $.ajax({
+                url:"robberyAdd",
+                type:'post',
+                data:data.field,
+                dataType:'json',
+                success:function () {
+                    layer.msg("保存成功");
+                }
+            })
             return false;
         });
     });

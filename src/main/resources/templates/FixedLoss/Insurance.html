@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <button class="layui-btn" data-type="reload" style="float: right">搜索</button>
+            <button class="layui-btn" data-type="reload" style="float: right" type="button">搜索</button>
         </div>
     </div>
 
@@ -116,6 +116,7 @@
             ,url: 'findAll'
             ,cols: [[
                 {checkbox: true, fixed: true}
+                ,{field:'taskId',hide:'true', title: 'taskId', sort: true, fixed: true}
                 ,{field:'compensate_case_id', title: '赔案编号', sort: true, fixed: true}
                 ,{field:'schedule_id', title: '调度编号'}
                 ,{field:'insured_truename', title: '被保险人', sort: true}
@@ -161,13 +162,47 @@
             var tr = obj.tr; //获得当前行 tr 的DOM对象
 
             if(layEvent === 'detail'){ //查看
-                //do somehing
-                layer.open({
-                    type: 2,
-                    content: 'car',
-                    area: ['800px', '600px'],
-                    title: ['查勘信息']
-                });
+
+                // layer.msg('ID：'+ data.compensate_case_id + ' 的查看操作');
+
+                if(data.schedule_id=='1'){
+                    layer.open({
+                        type: 2,
+                        content: 'car',
+                        area: ['800px', '600px'],
+                        title: ['查勘信息']
+                    });
+                }else if (data.schedule_id=='2') {
+                    layer.open({
+                        type: 2,
+                        content: 'human',
+                        scrollbar:'false',
+                        area: ['800px', '700px'],
+                        title: ['查勘信息']
+                    });
+                }else if (data.schedule_id=='3') {
+                    layer.open({
+                        type: 2,
+                        content: 'MaterialDamage',
+                        area: ['800px', '600px'],
+                        title: ['查勘信息']
+                    });
+                }else if (data.schedule_id=='4') {
+                    layer.open({
+                        type: 2,
+                        content: 'robbery',
+                        area: ['800px', '600px'],
+                        title: ['查勘信息']
+                    });
+                }else if (data.schedule_id=='5') {
+                    layer.open({
+                        type: 2,
+                        content: 'car',
+                        area: ['800px', '600px'],
+                        title: ['查勘信息']
+                    });
+                }
+
 
             }
         });
