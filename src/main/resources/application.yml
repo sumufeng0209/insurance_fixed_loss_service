@@ -22,6 +22,13 @@ spring:
         max-idle: 100
         min-idle: 10
         max-wait: 10000
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+    encoding: UTF-8
+  activiti:
+    database-schema: update
+    check-process-definitions: false
 eureka:
   client:
     service-url:
