@@ -9,10 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @Author: 马果
@@ -28,41 +27,52 @@ public class FixedLossService {
     @Autowired(required =false)
     private TaskService taskService;
 
+    @Autowired
+    private HttpSession session;
+
+    /**
+     * 现场查勘
+     * @param map
+     * @return
+     */
     public List<Map> getList(Map map){
-//        TaskQuery taskQuery=taskService.createTaskQuery();
-//        taskQuery.taskAssignee(map.get("user").toString());
-//        List<Task> taskList=taskQuery.list();
-//        List<Map> lists=new ArrayList<>();
-//        for (Task t:
-//             taskList) {
-//            String processInstanceId=t.getProcessInstanceId();
-//            map.put("instance_id",processInstanceId);
-//            Map m=fixedLossMapper.scheduleFindBy(map);
-//            m.put("taskId",t.getId());
-//            lists.add(m);
-//        }
+        Map userName=(Map) session.getAttribute("emp");
+        System.out.println(userName.get("emp_username"));
+        TaskQuery taskQuery=taskService.createTaskQuery();
+        taskQuery.taskAssignee(userName.get("emp_username").toString());
+        List<Task> taskList=taskQuery.list();
         List<Map> list=new ArrayList<>();
-        Map m=new HashMap();
-        m.put("compensate_case_id", 1);
-        m.put("schedule_id", 2);
-        Map m4=new HashMap();
-        m4.put("compensate_case_id", 1);
-        m4.put("schedule_id", 1);
-        Map m1=new HashMap();
-        m1.put("compensate_case_id", 1);
-        m1.put("schedule_id", 3);
-        Map m2=new HashMap();
-        m2.put("compensate_case_id", 1);
-        m2.put("schedule_id", 4);
-        Map m3=new HashMap();
-        m3.put("compensate_case_id", 1);
-        m3.put("schedule_id", 5);
-        list.add(m);
-        list.add(m1);
-        list.add(m2);
-        list.add(m3);
-        list.add(m4);
+        for (Task t:
+                taskList) {
+            String processInstanceId=t.getProcessInstanceId();
+            map.put("instance_id",processInstanceId);
+            Map m=fixedLossMapper.scheduleFindBy(map);
+            m.put("taskId",t.getId());
+            list.add(m);
+        }
         return list;
+    }
+
+    /**
+     * 车损定损查询
+     */
+    public List<Map> carFixed(Map map){
+        Map userName=(Map) session.getAttribute("emp");
+        System.out.println(userName.get("emp_username"));
+        TaskQuery taskQuery=taskService.createTaskQuery();
+        taskQuery.taskAssignee(userName.get("emp_username").toString());
+        List<Task> taskList=taskQuery.list();
+        List<Map> lists=new ArrayList<>();
+        for (Task t:
+             taskList) {
+            System.out.println(map);
+            String processInstanceId=t.getProcessInstanceId();
+            map.put("instance_id",processInstanceId);
+            Map m=fixedLossMapper.carFixedFind(map);
+            m.put("taskId",t.getId());
+            lists.add(m);
+        }
+        return lists;
     }
 
 
@@ -146,6 +156,7 @@ public class FixedLossService {
      * @param m
      */
     public void investigationAdd(Map m){
+        System.out.println(m);
         fixedLossMapper.investigationAdd(m);
     }
 
@@ -156,6 +167,10 @@ public class FixedLossService {
         return fixedLossMapper.robberyDamageFind(m);
     }
 
+    /**
+     * 盗抢图片插入
+     * @param m
+     */
     public void robberyDamageAdd(Map m){
         fixedLossMapper.investigatioImgAdd(m);
     }

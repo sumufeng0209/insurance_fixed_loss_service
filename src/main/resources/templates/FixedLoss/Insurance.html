@@ -117,6 +117,7 @@
             ,cols: [[
                 {checkbox: true, fixed: true}
                 ,{field:'taskId',hide:'true', title: 'taskId', sort: true, fixed: true}
+                ,{field:'instance_id',hide:'true', title: 'instance_id', sort: true, fixed: true}
                 ,{field:'compensate_case_id', title: '赔案编号', sort: true, fixed: true}
                 ,{field:'schedule_id', title: '调度编号'}
                 ,{field:'insured_truename', title: '被保险人', sort: true}
@@ -168,14 +169,14 @@
                 if(data.schedule_id=='1'){
                     layer.open({
                         type: 2,
-                        content: 'car',
+                        content: 'car?taskId='+data.taskId+"&schedule_id="+data.schedule_id,
                         area: ['800px', '600px'],
                         title: ['查勘信息']
                     });
                 }else if (data.schedule_id=='2') {
                     layer.open({
                         type: 2,
-                        content: 'human',
+                        content: 'human?taskId='+data.taskId+"&schedule_id="+data.schedule_id,
                         scrollbar:'false',
                         area: ['800px', '700px'],
                         title: ['查勘信息']
@@ -183,21 +184,21 @@
                 }else if (data.schedule_id=='3') {
                     layer.open({
                         type: 2,
-                        content: 'MaterialDamage',
+                        content: 'MaterialDamage?taskId='+data.taskId+"&schedule_id="+data.schedule_id,
                         area: ['800px', '600px'],
                         title: ['查勘信息']
                     });
                 }else if (data.schedule_id=='4') {
                     layer.open({
                         type: 2,
-                        content: 'robbery',
+                        content: 'robbery?taskId='+data.taskId+"&schedule_id="+data.schedule_id,
                         area: ['800px', '600px'],
                         title: ['查勘信息']
                     });
                 }else if (data.schedule_id=='5') {
                     layer.open({
                         type: 2,
-                        content: 'car',
+                        content: 'car?taskId='+data.taskId+"&schedule_id="+data.schedule_id,
                         area: ['800px', '600px'],
                         title: ['查勘信息']
                     });

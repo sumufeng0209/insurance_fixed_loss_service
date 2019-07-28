@@ -15,6 +15,12 @@ public interface FixedLossMapper {
      */
     public Map scheduleFindBy(Map m);
 
+    /**
+     * 待车损定损
+     * @param m
+     * @return
+     */
+    public Map carFixedFind(Map m);
 
     /**
      * 人伤查询

@@ -18,8 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -47,12 +46,12 @@ public class FixedLossController {
     public Map getList(@RequestParam Map m){
 
         System.out.println(m);
-
+        List<Map> list=fixedLossService.getList(m);
         Map map=new HashMap();
         map.put("code",0);
-        map.put("count",1000);
+        map.put("count",(int)(list.size()/10));
         map.put("msg","");
-        map.put("data",fixedLossService.getList(m));
+        map.put("data",list);
 
         return map;
     }
@@ -65,13 +64,18 @@ public class FixedLossController {
     }
 
 
+    @RequestMapping("/survey")
+    public String survey(){
+        return "FixedLoss/survey";
+    }
+
+
     /**
      * 待查勘
      * @return
      */
     @RequestMapping("init")
-    public String init(HttpSession session){
-        System.out.println(session.getAttribute("emp"));
+    public String init(){
         return "FixedLoss/Insurance";
     }
 
@@ -81,11 +85,26 @@ public class FixedLossController {
      * @return
      */
     @RequestMapping("car")
-    public String car(@RequestParam Map m,Model model){
+    public String car(@RequestParam Map m,Model model,HttpServletRequest request){
 
-//        Map map=fixedLossService.InvestigationFindBy(m);
+        Map map=fixedLossService.InvestigationFindBy(m);
+        Set set=map.entrySet();
+        //获取map里面的键和值，用来在页面显示以保存的数据
+        for(Iterator iter = set.iterator(); iter.hasNext();){
+            Map.Entry entry=(Map.Entry)iter.next();
+
+            String key=entry.getKey().toString();
+            String value=entry.getValue().toString();
+            System.out.print(key+"     "+value+"      ");
+            model.addAttribute(key,value);
+        }
+
+        model.addAttribute("taskId",request.getParameter("taskId"));
+        model.addAttribute("schedule_id",request.getParameter("schedule_id"));
+
+
+
 //        model.addAttribute("m", map);
-        System.out.println("asdasdasdasd");
         return "FixedLoss/VehicleDamage";
     }
 
@@ -96,8 +115,6 @@ public class FixedLossController {
     @RequestMapping("human")
     public String human(Model m){
 
-        m.addAttribute("name","1234567");
-        m.addAttribute("fixed_loss_remarks","1234567");
         return "FixedLoss/humanInjury";
     }
 
@@ -142,8 +159,10 @@ public class FixedLossController {
      */
     @RequestMapping("investigationAdd")
     @ResponseBody
-    public void investigationAdd(@RequestParam Map m){
+    public String investigationAdd(@RequestParam Map m){
+        System.out.println(m);
         fixedLossService.investigationAdd(m);
+        return "";
     }
 
 
@@ -152,10 +171,21 @@ public class FixedLossController {
      * @return
      */
     @RequestMapping("robbery")
-    public String robberyAndSurvey(@RequestParam Map m,Model model){
+    public String robberyAndSurvey(@RequestParam Map m,Model model,HttpServletRequest request){
 
-//        Map map=fixedLossService.robberyDamageFind(m);
-//        model.addAttribute("m", map);
+        Map map=fixedLossService.robberyDamageFind(m);
+        Set set=map.entrySet();
+        //获取map里面的键和值，用来在页面显示以保存的数据
+        for(Iterator iter = set.iterator(); iter.hasNext();) {
+            Map.Entry entry = (Map.Entry) iter.next();
+
+            String key = entry.getKey().toString();
+            String value = entry.getValue().toString();
+            model.addAttribute(key, value);
+        }
+
+        model.addAttribute("taskId",request.getParameter("taskId"));
+        model.addAttribute("schedule_id",request.getParameter("schedule_id"));
 
         return "FixedLoss/robberyAndSurvey";
     }
@@ -187,6 +217,23 @@ public class FixedLossController {
         return "FixedLoss/sue";
     }
 
+    /**
+     * 车损定损
+     */
+    @RequestMapping("carFixed")
+    @ResponseBody
+    public Map carFixed(@RequestParam Map map){
+        List<Map> list=fixedLossService.carFixed(map);
+
+        Map maps=new HashMap();
+        maps.put("code",0);
+        maps.put("count",(int)(list.size()/10));
+        maps.put("msg","");
+        maps.put("data",list);
+        return  maps;
+    }
+
+
 
     /**
      * 物损查勘定损页面
@@ -212,15 +259,6 @@ public class FixedLossController {
 
 
     /**
-     * 流程提交
-     */
-    public void completeTask(){
-        TaskService service=engine.getTaskService();
-        String taskId="";
-        service.complete(taskId);
-    }
-
-    /**
      *车损数据保存
      */
     @RequestMapping("carAdd")
@@ -232,7 +270,7 @@ public class FixedLossController {
         String taskId=m.get("instance_id").toString();
 
         String processInstanceId = service.createTaskQuery().taskId(taskId).singleResult().getProcessInstanceId();
-        m.put("processInstanceId",processInstanceId);
+        m.put("instance_id",processInstanceId);
         fixedLossService.investigationAdd(m);
         service.complete(taskId);
         return "";
@@ -253,13 +291,18 @@ public class FixedLossController {
         return "";
     }
 
+    /**
+     * 盗抢表提交
+     * @param m
+     * @return
+     */
     @RequestMapping("robberyAdd")
     @ResponseBody
     public String robbery(@RequestParam Map m){
         TaskService service=engine.getTaskService();
         String taskId=m.get("instance_id").toString();
         String processInstanceId=service.createTaskQuery().taskId(taskId).singleResult().getProcessInstanceId();
-        m.put("processInstanceId",processInstanceId);
+        m.put("instance_id",processInstanceId);
         fixedLossService.robberyDamageAdd(m);
         service.complete(taskId);
         return "";

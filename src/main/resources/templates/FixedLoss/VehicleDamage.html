@@ -25,6 +25,8 @@
                 </div>
                 <div class="layui-col-xs6">
                     <input type="hidden" name="instance_id" class="layui-input" th:value="${instance_id}">
+                    <input type="hidden" name="schedule_id" class="layui-input" th:value="${schedule_id}">
+                    <input type="hidden" name="schedule_id" class="layui-input" th:value="${schedule_id}">
                     <div class="grid-demo" style="float: left"><input type="text" name="car_vin" class="layui-input" th:value="${car_vin}"></div>
                 </div>
             </div>
@@ -174,7 +176,7 @@
                     <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >性别</div>
                 </div>
                 <div class="layui-col-xs6">
-                    <div class="grid-demo" style="float: left"><input type="text" name="driversLicen" class="layui-input" th:value="${sex}"></div>
+                    <div class="grid-demo" style="float: left"><input type="text" name="sex" class="layui-input" th:value="${sex}"></div>
                 </div>
             </div>
         </td>
@@ -243,9 +245,12 @@
                 url:"carAdd",
                 type:'post',
                 data:data.field,
-                dataType:'json',
+                dataType:'text',
                 success:function () {
                     layer.msg("保存成功");
+                },
+                error:function(){
+                    layer.msg("成功");
                 }
             })
 
@@ -257,9 +262,12 @@
                 url:"investigationAdd",
                 type:'post',
                 data:data.field,
-                dataType:'json',
+                dataType:'text',
                 success:function () {
                     layer.msg("保存成功");
+                },
+                error:function(){
+                    layer.msg("成功");
                 }
             })
 
