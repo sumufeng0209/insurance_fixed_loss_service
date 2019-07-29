@@ -2,31 +2,117 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.java.dao.FixedLossMapper">
 
-    <select id="findBy" parameterType="map" resultType="map">
-
-        SELECT * FROM vehicle_damage
-
-    </select>
-
-
     <select id="scheduleFindBy" parameterType="map" resultType="map">
 
-        SELECT* FROM schedule
+        SELECT * FROM `schedule` s JOIN report_a_case r ON (s.compensate_case_id=r.compensate_case_id) JOIN fixed_loss_type f ON(f.fixed_loss_id=s.schedule_type_id)
+
         <where>
-            <if test="#{schedule_id!=null and schedule_id!=''}">
+            <if test="instance_id!=null and instance_id!=''">
+                s.instance_id=#{instance_id}
+            </if>
+            <if test="schedule_id!=null and schedule_id!=''">
                 schedule_id=#{schedule}
             </if>
 
-            <if test="#{compensate_case_id!=null and compensate_case_id!=''}">
-                compensate_case_id=#{compensate_case_id}
+            <if test="compensate_case_id!=null and compensate_case_id!=''">
+                and s.compensate_case_id=#{compensate_case_id}
             </if>
 
-            <if test="#{compensate_case_id!=null and compensate_case_id!=''}">
-                compensate_case_id=#{compensate_case_id}
+            <if test="insured_truename!=null and insured_truename!=''">
+                and insured_truename=#{insured_truename}
+            </if>
+            <if test="car_number!=null and car_number!=''">
+                and car_number=#{car_number}
+            </if>
+            <if test="start_time!=null and start_time!=''">
+                and start_time=#{start_time}
+            </if>
+            <if test="stop_time!=null and stop_time!=''">
+                and stop_time=#{stop_time}
             </if>
         </where>
 
     </select>
+
+
+
+    <select id="carFixedFind" parameterType="map" resultType="map">
+
+        SELECT * FROM `schedule` s JOIN report_a_case r ON (s.compensate_case_id=r.compensate_case_id) JOIN fixed_loss_type f ON(f.fixed_loss_id=s.schedule_type_id) JOIN investigation i ON(i.schedule_id=s.schedule_id)
+
+        <where>
+            <if test="instance_id!=null and instance_id!=''">
+                s.instance_id=#{instance_id}
+            </if>
+            <if test="schedule_id!=null and schedule_id!=''">
+                s.schedule_id=#{schedule}
+            </if>
+
+            <if test="compensate_case_id!=null and compensate_case_id!=''">
+                and s.compensate_case_id=#{compensate_case_id}
+            </if>
+
+            <if test="insured_truename!=null and insured_truename!=''">
+                and insured_truename=#{insured_truename}
+            </if>
+            <if test="car_number!=null and car_number!=''">
+                and car_number=#{car_number}
+            </if>
+            <if test="start_time!=null and start_time!=''">
+                and start_time=#{start_time}
+            </if>
+            <if test="stop_time!=null and stop_time!=''">
+                and stop_time=#{stop_time}
+            </if>
+        </where>
+
+    </select>
+
+
+    <select id="humanFind" resultType="map" parameterType="map">
+
+    SELECT * FROM human_injury_costs c JOIN human_injury_damage d ON(c.human_injury_damage_id=d.human_injury_damage_id)
+
+    <where>
+        <if test="car_number!=null and car_number！=''">
+            car_number =#{car_number}
+        </if>
+    </where>
+
+    </select>
+
+
+    <select id="damage"  resultType="map" parameterType="map">
+        SELECT * FROM damage_of_goods_fee f JOIN damage_of_goods g ON (g.damage_of_goods_id=f.damage_of_goods_id) where car_number =#{car_number}
+
+    </select>
+
+    <select id="InvestigationFindBy" resultType="map" parameterType="map">
+        select * from  investigation where schedule_id=#{schedule_id}
+    </select>
+    
+    <insert id="investigatioImgAdd" parameterType="map">
+        insert into investigation_img values (uuid(),#{fileName},#{bytes,jdbcType=BINARY},#{investigationId})
+    </insert>
+
+    <update id="investigationAdd" parameterType="map">
+ UPDATE investigation SET car_vin=#{car_vin},car_number=#{car_number},car_engine_number=#{car_engine_number},factory_license_vehicle_type=#{factory_license_vehicle_type},car_number_color=#{car_number_color},manufacturer=#{manufacturer},location=#{location},accident=#{accident},is_main_car=#{is_main_car},driver_truename=#{driver_truename},driver_license_number=#{driver_license_number},first_register_time=#{first_register_time},phone=#{phone},sex=#{sex},COMMENT=#{comment},instance_id=#{instance_id} WHERE schedule_id=#{schedule_id}
+
+    </update>
+
+
+    <select id="robberyDamageFind" parameterType="map" resultType="map">
+
+        SELECT * FROM robbery_damage where schedule_id=#{schedule_id}
+
+    </select>
+
+    <insert id="robberyDamageAdd" parameterType="map">
+        insert  into robbery_damage values (uuid(),#{car_number},#{car_engine_number},#{car_vin},#{license_plate_color},#{car_brand},#{car_type},#{pay_price},#{driving_kilometre},#{service_life},#{fixed_loss_comment},#{emp_id},now(),#{instance_id},#{processInstanceId})
+    </insert>
+
+
+
 
 
 </mapper>

@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <script src="assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
     <script src="layui/layui.js" th:inline="none" charset="utf-8"></script>
     <script src="assets/js/jquery.min.js" th:inline="none" ></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -27,7 +27,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >姓名</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="name" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="name" class="layui-input" th:value="${name}"></div>
                     </div>
                 </div>
             </td>
@@ -39,8 +39,8 @@
                     <div class="layui-col-xs6">
                         <div class="grid-demo" style="float: left">
                             <select name="sex" lay-verify="required">
-                                <option value="0">男</option>
-                                <option value="1">女</option>
+                                <option value="0" th:selected="${sex=='0'}">男</option>
+                                <option value="1" th:selected="${sex=='1'}">女</option>
                             </select>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >年龄</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="age" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="age" class="layui-input" th:value="${age}"></div>
                     </div>
                 </div>
             </td>
@@ -64,7 +64,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >从事行业</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="industry" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="occupation" class="layui-input" th:value="${occupation}"></div>
                     </div>
                 </div>
             </td>
@@ -74,7 +74,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >工作单位</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="workUnit" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="company" class="layui-input" th:value="${company}"></div>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >标准工资</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="wages" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="standard_wage" class="layui-input" th:value="${standard_wage}"></div>
                     </div>
                 </div>
             </td>
@@ -97,7 +97,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >月收入小计</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="income" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="income" class="layui-input" th:value="${monthly_income}"></div>
                     </div>
                 </div>
             </td>
@@ -109,8 +109,8 @@
                     <div class="layui-col-xs6">
                         <div class="grid-demo" style="float: left">
                             <select name="ischangeHospital" lay-verify="required">
-                                <option value="0">是</option>
-                                <option value="1">否</option>
+                                <option value="0" th:selected="${is_transfer=='0'}">是</option>
+                                <option value="1" th:selected="${is_transfer=='1'}">否</option>
                             </select>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >护理人数</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="nursingNumber" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="nursing_number" class="layui-input" th:value="${nursing_number}"></div>
                     </div>
                 </div>
             </td>
@@ -134,7 +134,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >护理天数</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="nursingDays" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="nursing_days" class="layui-input" th:value="${nursing_days}"></div>
                     </div>
                 </div>
             </td>
@@ -144,7 +144,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >护理等级</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="nursingGrade" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="nursing_grade" class="layui-input" th:value="${nursing_grade}"></div>
                     </div>
                 </div>
             </td>
@@ -154,7 +154,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >护理人月收入小计</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="nursesMonthlyIncome" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="nursing_monthly_income" class="layui-input" th:value="${nursing_monthly_income}"></div>
                     </div>
                 </div>
             </td>
@@ -167,7 +167,7 @@
                     </div>
                     <div class="layui-col-xs6">
                         <div class="grid-demo" style="float: left">
-                            <input type="text" class="layui-input" id="test1" name="startTime" >
+                            <input type="text" class="layui-input" id="test1" name="nursing_start_time" th:value="${nursing_start_time}">
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                     </div>
                     <div class="layui-col-xs6">
                         <div class="grid-demo" style="float: left">
-                            <input type="text" class="layui-input" id="test2" name="outTime" >
+                            <input type="text" class="layui-input" id="test2" name="nursing_stop_time" th:value="${nursing_stop_time}" >
                         </div>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >就诊医院</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="Hospital" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="visiting_hospital" class="layui-input" th:value="${visiting_hospital}"></div>
                     </div>
                 </div>
             </td>
@@ -203,7 +203,7 @@
                     </div>
                     <div class="layui-col-xs6">
                         <div class="grid-demo" style="float: left">
-                            <input type="text" class="layui-input" id="test3" name="timeOfAdmission" >
+                            <input type="text" class="layui-input" id="test3" name="time_of_admission" th:value="${time_of_admission}" >
                         </div>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >住院天数</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="hospitalizationDays" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="hospitalization_days" class="layui-input" th:value="${hospitalization_days}"></div>
                     </div>
                 </div>
             </td>
@@ -224,7 +224,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >住院号</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="hospitalizationNumber" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="hospitalizationNumber" class="layui-input" th:value="${hospitalization_number}"></div>
                     </div>
                 </div>
             </td>
@@ -236,7 +236,7 @@
                         <div class="grid-demo grid-demo-bg1" style="float: right;width: 100px;padding-top: 7px" >治疗天数</div>
                     </div>
                     <div class="layui-col-xs6">
-                        <div class="grid-demo" style="float: left"><input type="text" name="numberOfDaysOfTreatment" class="layui-input"></div>
+                        <div class="grid-demo" style="float: left"><input type="text" name="numberOfDaysOfTreatment" class="layui-input" th:value="${number_of_days_of_treatment}"></div>
                     </div>
                 </div>
             </td>
@@ -247,11 +247,11 @@
                     </div>
                     <div class="layui-col-xs6">
                         <div class="grid-demo" style="float: left">
-                            <select name="degreeOfInjury" lay-verify="required">
-                                <option value="01">轻伤一级</option>
-                                <option value="02">轻伤二级</option>
-                                <option value="11">重伤一级</option>
-                                <option value="12">重伤二级</option>
+                            <select name="degreeOfInjury" lay-verify="required" >
+                                <option value="01" th:selected="degree_of_injury=='01'">轻伤一级</option>
+                                <option value="02" th:selected="degree_of_injury=='02'">轻伤二级</option>
+                                <option value="11" th:selected="degree_of_injury=='11'">重伤一级</option>
+                                <option value="12" th:selected="degree_of_injury=='12'">重伤二级</option>
                             </select>
                         </div>
                     </div>
@@ -265,16 +265,16 @@
                     <div class="layui-col-xs6">
                         <div class="grid-demo" style="float: left">
                             <select name="disabilityGrade" lay-verify="required">
-                                <option value="10">十级</option>
-                                <option value="9">九级</option>
-                                <option value="8">八级</option>
-                                <option value="7">七级</option>
-                                <option value="6">六级</option>
-                                <option value="5">五级</option>
-                                <option value="4">四级</option>
-                                <option value="3">三级</option>
-                                <option value="2">二级</option>
-                                <option value="1">一级</option>
+                                <option value="10" th:selected="disability_grade=='10'">十级</option>
+                                <option value="9" th:selected="disability_grade=='9'">九级</option>
+                                <option value="8" th:selected="disability_grade=='8'">八级</option>
+                                <option value="7" th:selected="disability_grade=='7'">七级</option>
+                                <option value="6" th:selected="disability_grade=='6'">六级</option>
+                                <option value="5" th:selected="disability_grade=='5'">五级</option>
+                                <option value="4" th:selected="disability_grade=='4'">四级</option>
+                                <option value="3" th:selected="disability_grade=='3'">三级</option>
+                                <option value="2" th:selected="disability_grade=='2'">二级</option>
+                                <option value="1" th:selected="disability_grade=='1'">一级</option>
                             </select>
                         </div>
                     </div>
@@ -290,7 +290,7 @@
                     </div>
                     <div class="layui-col-md11">
                         <div class="grid-demo" style="float: left;width: 100%">
-                            <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            <textarea name="survey_comment" placeholder="请输入内容" class="layui-textarea" th:text="${survey_comment}"></textarea>
                         </div>
                     </div>
                 </div>
@@ -307,83 +307,83 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox" name="like[headInjury]" title="颅脑损伤">
+                <input type="checkbox" name="like[headInjury]" title="颅脑损伤" value="颅脑损伤"  th:checked="${headInjury=='颅脑损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[shapeInjury]" title="样貌损伤">
+                <input type="checkbox" name="like[shapeInjury]" title="样貌损伤" value="样貌损伤"  th:checked="${shapeInjury=='样貌损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[neckInjury]" title="颈部损伤">
+                <input type="checkbox" name="like[neckInjury]" title="颈部损伤" value="颈部损伤"  th:checked="${neckInjury=='颈部损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[cervicalInjury]" title="颈椎损伤">
+                <input type="checkbox" name="like[cervicalInjury]" title="颈椎损伤" value="颈椎损伤"  th:checked="${cervicalInjury=='颈椎损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[clavicleInjury]" title="锁骨损伤">
+                <input type="checkbox" name="like[clavicleInjury]" title="锁骨损伤"  value="锁骨损伤" th:checked="${clavicleInjury=='锁骨损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[sternumInjury]" title="胸骨损失">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" name="like[ribInjury]" title="肋骨损伤">
-            </td>
-            <td>
-                <input type="checkbox" name="like[cervicalVertebraInjury]" title="颈椎损伤">
-            </td>
-            <td>
-                <input type="checkbox" name="like[spinalCordInjury]" title="脊髓损伤">
-            </td>
-            <td>
-                <input type="checkbox" name="like[pelvisInjury]" title="盆骨损伤">
-            </td>
-            <td>
-                <input type="checkbox" name="like[femoralHeadInjury]" title="股骨头损伤">
-            </td>
-            <td>
-                <input type="checkbox" name="like[upperArmInjury]" title="上臂损伤">
+                <input type="checkbox" name="like[sternumInjury]" title="胸骨损失"  value="胸骨损失" th:checked="${sternumInjury=='胸骨损失'}">
             </td>
         </tr>
         <tr>
             <td>
-                <input type="checkbox" name="like[theLegsInjury]" title="下肢损伤">
+                <input type="checkbox" name="like[ribInjury]" title="肋骨损伤" value="肋骨损伤" th:checked="${ribInjury=='肋骨损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[fractureOfHand]" title="手部骨折">
+                <input type="checkbox" name="like[cervicalVertebraInjury]" title="颈椎损伤" value="颈椎损伤"  th:checked="${cervicalVertebraInjury=='颈椎损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[fractureOfFoot]" title="足部骨折">
+                <input type="checkbox" name="like[spinalCordInjury]" title="脊髓损伤" value="脊髓损伤"  th:checked="${spinalCordInjury=='脊髓损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[heartInjury]" title="心脏损伤">
+                <input type="checkbox" name="like[pelvisInjury]" title="盆骨损伤" value="盆骨损伤"  th:checked="${pelvisInjury=='盆骨损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[lungInjury]" title="肺部损伤">
+                <input type="checkbox" name="like[femoralHeadInjury]" title="股骨头损伤" value="股骨头损伤"  th:checked="${femoralHeadInjury=='股骨头损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[liverInjury]" title="肝脏损伤">
+                <input type="checkbox" name="like[upperArmInjury]" title="上臂损伤" value="上臂损伤"  th:checked="${upperArmInjury=='上臂损伤'}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="like[theLegsInjury]" title="下肢损伤" value="下肢损伤"  th:checked="${upperArmInjury=='下肢损伤'}">
+            </td>
+            <td>
+                <input type="checkbox" name="like[fractureOfHand]" title="手部骨折" value="手部骨折" th:checked="${fractureOfHand=='手部骨折'}">
+            </td>
+            <td>
+                <input type="checkbox" name="like[fractureOfFoot]" title="足部骨折" value="足部骨折"   th:checked="${fractureOfFoot=='足部骨折'}">
+            </td>
+            <td>
+                <input type="checkbox" name="like[heartInjury]" title="心脏损伤" value="心脏损伤"   th:checked="${heartInjury=='心脏损伤'}">
+            </td>
+            <td>
+                <input type="checkbox" name="like[lungInjury]" title="肺部损伤" value="肺部损伤"   th:checked="${lungInjury=='肺部损伤'}">
+            </td>
+            <td>
+                <input type="checkbox" name="like[liverInjury]" title="肝脏损伤" value="肝脏损伤" th:checked="${liverInjury=='肝脏损伤'}">
             </td>
 
         </tr>
         <tr>
             <td>
-                <input type="checkbox" name="like[splenicInjury]" title="脾脏损伤">
+                <input type="checkbox" name="like[splenicInjury]" title="脾脏损伤" value="脾脏损伤"  th:checked="${splenicInjury=='脾脏损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[pancreaticInjury]" title="胰脏损伤">
+                <input type="checkbox" name="like[pancreaticInjury]" title="胰脏损伤" value="胰脏损伤"  th:checked="${pancreaticInjury=='胰脏损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[renalInjury]" title="肾脏损伤">
+                <input type="checkbox" name="like[renalInjury]" title="肾脏损伤" value="肾脏损伤" th:checked="${renalInjury=='肾脏损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[otherVisceralInjury]" title="其他内脏损伤">
+                <input type="checkbox" name="like[otherVisceralInjury]" title="其他内脏损伤" value="其他内脏损伤"  th:checked="${otherVisceralInjury=='其他内脏损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[softTissueInjury]" title="软组织损伤">
+                <input type="checkbox" name="like[softTissueInjury]" title="软组织损伤" value="软组织损伤"  th:checked="${softTissueInjury=='软组织损伤'}">
             </td>
             <td>
-                <input type="checkbox" name="like[otherInjuriesInjury]" title="其他损伤">
+                <input type="checkbox" name="like[otherInjuriesInjury]" title="其他损伤" value="其他损伤"  th:checked="${otherInjuriesInjury=='其他损伤'}">
             </td>
         </tr>
         </tbody>
@@ -397,7 +397,7 @@
         </tr>
         <tr>
             <td>
-                <textarea name="injuryDescription" placeholder="请输入内容" class="layui-textarea"></textarea>
+                <textarea name="Injury_description" placeholder="请输入内容" class="layui-textarea" th:text="${Injury_description}"></textarea>
             </td>
         </tr>
         </tbody>
@@ -411,59 +411,58 @@
         </tr>
         <tr>
             <td>
-                <textarea name="contactInformation" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    <textarea name="contact_information" placeholder="请输入内容" class="layui-textarea" th:text="${contact_information}"></textarea>
             </td>
         </tr>
         </tbody>
     </table>
-<table width="100%">
-    <tbody>
-    <tr>
-        <td  style="background-color: #FAFAFA;height: 50px">
-            赔偿费用情况
-        </td>
-    </tr>
-    <tr>
-        <td>
+    <table width="100%">
+        <tbody>
+        <tr>
+            <td  style="background-color: #FAFAFA;height: 50px">
+                赔偿费用情况
+            </td>
+        </tr>
+        <tr>
+            <td>
 
-            <div class="layui-row">
-                <div class="layui-col-md2" style="padding-top: 10px">
-                    受害人所在车辆车牌号:
-                </div>
-                <div class="layui-col-md2">
-                    <input class="layui-input" name="id" id="demoReload" autocomplete="off">
-                </div>
-                <div class="layui-col-md2">
-                        <button class="layui-btn" data-type="reload">搜索</button>
-                        <button class="layui-btn" data-type="getCheckLength">增加</button>
-                </div>
-                <div class="layui-col-md6">
+                <div class="layui-row">
+                    <div class="layui-col-md2" style="padding-top: 10px">
+                        受害人所在车辆车牌号:
+                    </div>
+                    <div class="layui-col-md2">
+                        <input class="layui-input" name="car_number" id="demoReload" autocomplete="off" th:value="${car_number}">
+                    </div>
+                    <div class="layui-col-md2 layui-btn-group demoTable">
+                            <button class="layui-btn" data-type="reload" type="button">搜索</button>
+                    </div>
+                    <div class="layui-col-md6">
+
+                    </div>
 
                 </div>
 
-            </div>
-
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table class="layui-hide" id="table_user" lay-filter="user"></table>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<table width="100%">
-    <tr>
-        <td  style="background-color: #FAFAFA;height: 50px;">
-            定损备注
-        </td>
-    </tr>
-    <tr>
-        <td width="100%">
-            <textarea name="fixedLossRemarks" placeholder="请输入内容" class="layui-textarea"></textarea>
-        </td>
-    </tr>
-</table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="layui-hide" id="table_user" lay-filter="user"></table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table width="100%">
+        <tr>
+            <td  style="background-color: #FAFAFA;height: 50px;">
+                定损备注
+            </td>
+        </tr>
+        <tr>
+            <td width="100%">
+                <textarea name="fixed_loss_remarks" placeholder="请输入内容" class="layui-textarea" th:text="${fixed_loss_remarks}"></textarea>
+            </td>
+        </tr>
+    </table>
 
     <table>
         <tr>
@@ -474,7 +473,7 @@
                 <a href="#" class="layui-btn">索赔申请书</a>
                 <a href="#" class="layui-btn">索赔须知</a>
                 <a href="#" class="layui-btn">暂缓</a>
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button class="layui-btn" lay-submit lay-filter="formDemo" type="button">立即提交</button>
             </td>
         </tr>
     </table>
@@ -486,7 +485,11 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData" type="button">新增</button>
+    </div>
+</script>
 <script>
 
     layui.use('form', function(){
@@ -494,10 +497,19 @@
 
         //监听提交
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
+            $.ajax({
+                url:"humanAdd",
+                type:'post',
+                data:data.field,
+                dataType:'json',
+                success:function () {
+                    layer.msg("保存成功");
+                }
+            })
             return false;
         });
     });
+
 
 
     layui.use('laydate', function(){
@@ -521,10 +533,15 @@
     layui.use('table', function(){
         var table = layui.table;
 
+        //监听表格复选框选择
+        table.on('checkbox(user)', function(obj){
+            console.log(obj)
+        });
         //方法级渲染
         table.render({
             elem: '#table_user'
             ,url: 'humanDetails'
+            ,toolbar: '#toolbarDemo'
             ,cols: [
                 [
                     {checkbox: true, fixed: true}
@@ -542,6 +559,7 @@
             ,page: true
             ,height: 310
         });
+
 
 
         //监听工具条
@@ -566,13 +584,28 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
-                        key: {
-                            id: demoReload.val()
-                        }
+                        id: demoReload.val()
                     }
                 }, 'data');
             }
         };
+
+        //头工具栏事件
+        table.on('toolbar(user)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;  //获取选中行数据
+                    table.reload('testReload', {
+                        url: 'humanDetails'
+                        ,where: {}
+                    });
+                    break;
+            };
+        });
+
+
+
 
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/assets/js/jquery.min.js" th:inline="none" ></script>
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="layui/layui.js" th:inline="none" charset="utf-8"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form class="layui-form" action="">
+    <table width="100%" class="table">
+        <tbody>
+        <tr>
+            <th colspan="6" style="background-color: #FAFAFA;height: 50px">
+                财产损失信息
+            </th>
+        </tr>
+        <tr>
+            <td>
+                损失财产名称
+            </td>
+            <td>
+                <input type="text" name="property_name" class="layui-input" th:value="${property_name}">
+            </td>
+            <td>
+                物主
+            </td>
+            <td>
+                <input type="text" name="owner" class="layui-input" th:value="${owner}">
+            </td>
+            <td>
+                联系方式
+            </td>
+            <td>
+                <input type="text" name="phone" class="layui-input" th:value="${phone}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                查勘地点
+            </td>
+            <td>
+                <input type="text" name="location" class="layui-input" th:value="${location}">
+            </td>
+            <td>
+                是否第一现场查勘
+            </td>
+            <td>
+                <select name="is_first_check" lay-verify="required">
+                    <option value="1" th:selected="${is_first_check=='1'}">是</option>
+                    <option value="0" th:selected="${is_first_check=='0'}">否</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                损失描述
+            </td>
+            <td colspan="5">
+                <textarea name="loss_description" placeholder="请输入内容" class="layui-textarea" th:text="${loss_description}"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <table width="100%">
+        <tr>
+            <td>
+                <div style="float:right;">
+                    <a href="#" class="layui-btn">上传文档</a>
+                    <a href="#" class="layui-btn">现场查勘记录</a>
+                    <a href="#" class="layui-btn">索赔申请书</a>
+                    <a href="#" class="layui-btn">索赔须知</a>
+                    <a href="#" class="layui-btn">暂缓</a>
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="button">立即提交</button>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+</form>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="mds" type="button">新增</button>
+    </div>
+</script>
+
+
+<script>
+
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            $.ajax({
+                url:"humanAdd",
+                type:'post',
+                data:data.field,
+                dataType:'json',
+                success:function () {
+                    layer.msg("保存成功");
+                }
+            })
+            return false;
+        });
+    });
+
+
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url:'md'
+            ,toolbar: '#toolbarDemo'
+            ,id: 'testReload'
+            ,cols: [
+                [{field:'fee_name', title: '费用名称'}
+                    ,{field:'details', title: '损失描述', sort: true}
+                    ,{field:'report_loss_price', title: '报损金额'}
+                    ,{field:'eliminate_price', title: '剔除金额'}
+                    ,{field:'estimate_price', title: '估损金额', sort: true}
+                ]
+            ]
+            ,page: true
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+            switch(obj.event){
+                case 'mds':
+                    var data = checkStatus.data;  //获取选中行数据
+                    table.reload('testReload', {
+                        url: 'md'
+                        ,where: {}
+                    });
+                    break;
+            };
+        });
+
+
+
+    });
+</script>
+
+
+</body>
+</html>

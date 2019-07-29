@@ -3,15 +3,6 @@ server:
 spring:
   application:
     name: fixed-loss-service
-  redis:
-    host: 192.168.217.128
-    port: 6379
-    jedis:
-      pool:
-        max-active: 1000
-        max-idle: 100
-        min-idle: 10
-        max-wait: 10000
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: thw
@@ -22,13 +13,22 @@ spring:
       min-idle: 20
       max-idle: 100
       max-active: 300
+  redis:
+    host: 192.168.67.128
+    port: 6379
+    jedis:
+      pool:
+        max-active: 1000
+        max-idle: 100
+        min-idle: 10
+        max-wait: 10000
+  activiti:
+    database-schema: update
+    check-process-definitions: false
   thymeleaf:
     mode: LEGACYHTML5
     cache: false
     encoding: UTF-8
-  activiti:
-    database-schema: update
-    check-process-definitions: false
 eureka:
   client:
     service-url:
@@ -38,3 +38,4 @@ eureka:
 mybatis:
   mapper-locations: Mapper/*Mapper.xml
   type-aliases-package: java.util
+

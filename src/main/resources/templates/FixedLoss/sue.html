@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <script src="assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
     <script src="layui/layui.js" th:inline="none" charset="utf-8"></script>
     <script src="assets/js/jquery.min.js" th:inline="none" ></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/bootstrap.min.js"></script>
 </head>
 <body>
 <form class="layui-form" action="">
@@ -23,39 +23,39 @@
                 直赔/外修
             </td>
             <td>
-                <select name="isRepair" lay-verify="required">
-                    <option value="">直赔</option>
-                    <option value="">外修</option>
+                <select name="rest_type" lay-verify="required">
+                    <option value="直赔" th:selected="${rest_type=='直赔'}">直赔</option>
+                    <option value="外修" th:selected="${rest_type=='外修'}">外修</option>
                 </select>
             </td>
             <td>
                 修理厂名称
             </td>
             <td>
-                <input type="text" name="name" class="layui-input">
+                <input type="text" name="repair_depot_name" class="layui-input" th:text="${repair_depot_name}">
             </td>
             <td>
                 修理厂资质
             </td>
             <td>
-                <select name="Qualifications" lay-verify="required">
-                    <option value="">一类</option>
-                    <option value="">二类</option>
-                    <option value="">三类</option>
+                <select name="repair_depot_level" lay-verify="required">
+                    <option value="一类" th:selected="${repair_depot_level=='一类'}">一类</option>
+                    <option value="二类" th:selected="${repair_depot_level=='二类'}">二类</option>
+                    <option value="三类" th:selected="${repair_depot_level=='三类'}">三类</option>
                 </select>
             </td>
         </tr>
         <tr>
             <td>修理厂电话</td>
-            <input type="text" name="Telephone" class="layui-input">
+            <input type="text" name="repair_depot_phone" class="layui-input" th:text="${repair_depot_phone}">
             <td>修理厂传真</td>
-            <td><input type="text" name="Fax" class="layui-input"></td>
+            <td><input type="text" name="repair_depot_fax" class="layui-input" th:text="${repair_depot_fax}"></td>
             <td>修理厂联系人</td>
-            <td><input type="text" name="name" class="layui-input"></td>
+            <td><input type="text" name="repair_depot_linkman" class="layui-input" th:text="${repair_depot_linkman}"></td>
         </tr>
         <tr>
             <td colspan="6">
-                修理厂地址<input type="text" name="name" class="layui-input">
+                修理厂地址<input type="text" name="repair_depot_address" class="layui-input" th:text="${repair_depot_address}">
             </td>
         </tr>
         <tr>
@@ -76,19 +76,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+    <button class="layui-btn" lay-submit lay-filter="formDemo" type="button">立即提交</button>
 </form>
 
 <script>
@@ -98,7 +86,15 @@
 
         //监听提交
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
+            $.ajax({
+                url:"carAdd",
+                type:'post',
+                data:data.field,
+                dataType:'json',
+                success:function () {
+                    layer.msg("保存成功");
+                }
+            })
             return false;
         });
     });
