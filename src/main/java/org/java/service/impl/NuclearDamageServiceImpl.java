@@ -53,10 +53,15 @@ public class NuclearDamageServiceImpl implements NuclearDamageService {
         for (Task task : tasks) {
             String processInstanceId = task.getProcessInstanceId();
             Map<String,Object> map = null;
+
             if (task.getName().equals("车辆定损")){
                 map = vehicleDamageMapper.findByProcessInstanceId(processInstanceId);
-            }else if (task.getName().equals("盗抢定损")){
+            }else if (task.getName().equals("盗抢查勘定损")){
                 map = robberyDamageMapper.findByProcessInstanceId(processInstanceId);
+            }
+
+            if (map == null){
+                continue;
             }
 
             map.put("instance_id",task.getProcessInstanceId());
@@ -78,7 +83,7 @@ public class NuclearDamageServiceImpl implements NuclearDamageService {
         String taskId = map.get("taskId").toString();
         vehicleDamageVerifyMapper.audit(map);
         Map<String,Object> variables = new HashMap<>();
-        variables.put("carAdopt",map.get("is_adopt")); //设置流程变量
+        variables.put("carAdopt",1); //设置流程变量
         taskService.complete(taskId,variables);
     }
 
