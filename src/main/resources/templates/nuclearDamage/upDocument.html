@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link href="layui/css/layui.css" rel="stylesheet" type="text/css">
+    <script src="layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/showNuclearDamage.css">
+    <script type="text/html" id="edit1">
+        <div>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">上传单证</button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">显示单证</button>
+        </div>
+    </script>
+</head>
+<body>
+<form class="bs-example bs-example-form" role="form">
+    <div class="form-group" style="margin: 20px 420px;">
+        <div class="input-group">
+            <span class="input-group-addon">赔案编号:</span>
+            <input type="text" class="form-control" name="compensate_case_id" id="compensate_case_id">
+        </div>
+
+    </div>
+
+    <div style="float: right;margin: -110px 420px;" class="form-group">
+
+        <div class="input-group">
+            <span class="input-group-addon">车牌号:</span>
+            <input type="text" class="form-control" name="car_name" id="car_name" maxlength="7"/>
+        </div>
+
+
+    </div>
+
+    <div style="width: 100px;margin: 0 auto;" class="form-group">
+        <button style="width: 100px;" type="button" class="btn btn-default" data-dismiss="modal">查询</button>
+    </div>
+</form>
+
+
+<table class="layui-table" id="showData" lay-filter="documentsTable">
+
+</table>
+</body>
+<script>
+    var form;
+    var table;
+    layui.use(['form','table'],function(){
+        form = layui.form;
+        form.render();
+        table = layui.table;
+        showData();
+
+    });
+    //渲染表格,显示数据
+    function showData(){
+        table.render({
+            elem: '#showReplaceProject'
+            ,url:'showReplaceProject'
+            ,cols: [[
+                {field:'compensate_case_id',title: '赔案编号',align : 'center'}
+                ,{field:'schedule_id',title: '报案编号',align : 'center'}
+                ,{field:'car_name',title: '车牌号',align : 'center'}
+                ,{field:'insured_truename',title: '被保险人',align : 'center'}
+                ,{fixed: 'right', title:'操作',align : 'center', toolbar: '#edit1'}
+            ]]
+            ,page: true
+        });
+        table.on('row(showData)', function(obj){
+
+        });
+    }
+</script>
+</html>

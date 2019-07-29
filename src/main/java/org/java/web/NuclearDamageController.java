@@ -36,7 +36,8 @@ public class NuclearDamageController {
     @RequestMapping("showAll")
     @ResponseBody
     private Map<String,Object> showAll(@RequestParam Map<String,Object> map,HttpSession session){
-        map.put("userName",session.getAttribute("emp"));
+        Map<String,Object> emp = (Map<String, Object>) session.getAttribute("emp");
+        map.put("userName",emp.get("emp_username"));
         return nuclearDamageService.showAll(map);
     }
 
